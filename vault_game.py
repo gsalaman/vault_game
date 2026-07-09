@@ -1,3 +1,4 @@
+# this version JUST drives the key leds/buttons.  Gonna start here to make sure my python logic is good.
 key_circle = neopixel.create(DigitalPin.P2, 16, NeoPixelMode.RGB)
 key_state = "wait_for_press"
 key_count = 0
