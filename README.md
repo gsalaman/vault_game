@@ -20,4 +20,10 @@ The key one is most straighforward:
 * Flash ring.  Has a count (6), and then a "next update time" + 200 ms
 * Then back to "waiting for press.
 
+The state game is a little more involved:
+  * Want an idle state where we're doing nothing.  Not really gonna be used for simultaneous, but good for when we do sequential
+  * Waiting for input state:  flash symbol, look for button
+  * button success state:  you got it right...flash all
+  * puzzle success state:  flash all again?  Faster?  Open vault.  Here for 5 seconds, then back to either idle or waiting for input.
+    
 
