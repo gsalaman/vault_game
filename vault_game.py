@@ -8,7 +8,7 @@ rgb_blue = 0x0000ff
 rgb_yellow = 0xffff00
 rgb_black = 0x00
 
-def process_wait_for_press():
+def key_process_wait_for_press():
     global key_state, key_circle
     if (pins.digital_read_pin(DigitalPin.P11) == 0):
         key_state = "spin"
@@ -16,7 +16,7 @@ def process_wait_for_press():
         key_circle.set_pixel_color(0, rgb_green)
         key_circle.show()
 
-def process_spin():
+def key_process_spin():
     global key_next_update_ms, key_circle, key_count, key_state
     # is it time to do an update?
     if (input.running_time() > key_next_update_ms):
@@ -35,7 +35,7 @@ def process_spin():
         # calculate the next update input_running_time
         key_next_update_ms = key_next_update_ms + 50
 
-def process_flash():
+def key_process_flash():
     global key_count, key_next_update_ms, key_circle, key_state
     # is it time to do an update?
     if (input.running_time() > key_next_update_ms):
@@ -56,11 +56,11 @@ def process_flash():
 
 def drive_key_state():
     if (key_state == "wait_for_press"):
-        process_wait_for_press()
+        key_process_wait_for_press()
     elif (key_state == "spin"):
-        process_spin()
+        key_process_spin()
     elif (key_state == "flash"):
-        process_flash()
+        key_process_flash()
 
 def on_forever():
     drive_key_state()
