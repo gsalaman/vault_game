@@ -20,7 +20,8 @@ def key_process_wait_for_press():
 def key_process_spin():
     global key_next_update_ms, key_circle, key_count, key_state
     # is it time to do an update?
-    if (input.running_time() > key_next_update_ms):
+    time_now_ms = input.running_time()
+    if (time_now_ms > key_next_update_ms):
         #advance the LED
         key_circle.rotate(-1)
         key_circle.show()
@@ -34,12 +35,13 @@ def key_process_spin():
     # otherwise, prepare for the next rotation
     else:
         # calculate the next update input_running_time
-        key_next_update_ms = key_next_update_ms + 50
+        key_next_update_ms = time_now_ms + 50
 
 def key_process_flash():
     global key_count, key_next_update_ms, key_circle, key_state
     # is it time to do an update?
-    if (input.running_time() > key_next_update_ms):
+    time_now_ms = input.running_time()
+    if (time_now_ms > key_next_update_ms):
         # 3 ons, 3 offs makes 6 iterations through this state
         if (key_count < 6):
             # odds are on, evens are offs
@@ -50,7 +52,7 @@ def key_process_flash():
             key_count = key_count + 1
 
             # 200 ms between flashes
-            key_next_update_ms = key_next_update_ms + 200
+            key_next_update_ms = time_now_ms + 200
         else:
             key_circle.show_color(rgb_black)
             key_state = "wait_for_press"
