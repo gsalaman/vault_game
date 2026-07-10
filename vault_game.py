@@ -25,17 +25,16 @@ def key_process_spin():
         #advance the LED
         key_circle.rotate(-1)
         key_circle.show()
+        # calculate the next update input_running_time
+        key_next_update_ms = time_now_ms + 50
+        key_count = key_count + 1
     
     # we're gonna count how many times we've done a "spin"
     # if we do 3 rotations (48), we're done...move on to flashing
-    key_count = key_count + 1
     if (key_count > 48):
         key_count = 0
         key_state = "flash"
-    # otherwise, prepare for the next rotation
-    else:
-        # calculate the next update input_running_time
-        key_next_update_ms = time_now_ms + 50
+
 
 def key_process_flash():
     global key_count, key_next_update_ms, key_circle, key_state
